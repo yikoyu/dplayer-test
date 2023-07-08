@@ -1,0 +1,64 @@
+<!--
+ * @Date: 2023-03-18 15:14:33
+ * @LastEditors: yikoyu 2282373181@qq.com
+ * @LastEditTime: 2023-07-02 19:01:00
+ * @FilePath: \player\player.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.global.min.js"></script> -->
+    <!-- <script src="https://cdn.bootcdn.net/ajax/libs/flv.js/1.5.0/flv.js"></script> -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/hls.js/8.0.0-beta.3/hls.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/dplayer/1.25.1/DPlayer.min.js"></script>
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+    <body>
+      <div id="dplayer"></div>
+      <!-- 推子 04 -->
+      <input value="https://vip.ffzyread.com/20230503/11287_0e666990/index.m3u8" />
+      <button onclick="loadPayer()">播放</button>
+    </body>
+    <script>
+      function loadPayer() {
+        const input = document.querySelector("input")
+        input.value
+
+        const dp = new DPlayer({
+          container: document.getElementById("dplayer"),
+          live: false, //是否直播
+          //hotkey: true,	//热键开启
+          screenshot: true, //截图开启
+          autoplay: true, //自动播放开启
+          mutex: true, // 多个视频互斥
+          volume: 0.7, // 音量
+          playbackSpeed: [0.5, 1, 1.5, 2],
+          video: {
+            url: input.value,
+            type: 'hls',
+          },
+          subtitle: {
+            url: 'http://127.0.0.1:9527/player/04.vtt',
+            type: 'webvtt'
+          },
+          danmaku: {
+              // ...
+              id: 1678963,
+              addition: ['https://s-sh-17-dplayercdn.oss.dogecdn.com/1678963.json'],
+          },
+        });
+
+        
+      }
+    </script>
+  </head>
+</html>
+
